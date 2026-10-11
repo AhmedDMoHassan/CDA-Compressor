@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CDA Guide</title>
+<style>
+  :root {
+    --ink: #1d2433; --muted: #5b6475; --line: #d5dae3; --soft: #f4f6f9; --paper: #ffffff;
+    --navy: #1a4080; --blue: #2f6fd0; --blueSoft: #dcebff; --green: #2e8b3e; --greenSoft: #d4ecd4;
+    --amber: #c77c0e; --amberSoft: #fff0b0; --red: #c62828; --violet: #6a3fb5; --rowBlue: #e1efff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink);
+    font: 14px/1.55 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { display: grid; grid-template-columns: 210px minmax(0, 1fr); min-height: 100vh; }
+  nav { position: sticky; top: 0; align-self: start; height: 100vh; overflow: auto;
+    background: var(--soft); border-right: 1px solid var(--line); padding: 18px 14px; }
+  nav .brand { font-weight: 700; color: var(--navy); font-size: 15px; margin-bottom: 2px; }
+  nav .sub { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
+  nav a { display: block; color: var(--ink); text-decoration: none; padding: 5px 8px; border-radius: 6px; font-size: 13px; }
+  nav a:hover { background: #e6ebf3; }
+  nav .step { display: inline-block; min-width: 20px; height: 20px; line-height: 20px; text-align: center; border-radius: 10px;
+    background: var(--navy); color: #fff; font-size: 11px; font-weight: 700; margin-right: 6px; }
+  nav .grp { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin: 14px 8px 4px; }
+  main { padding: 26px 34px 60px; max-width: 1100px; }
+  h1 { font-size: 26px; margin: 0 0 4px; color: var(--navy); letter-spacing: -.01em; }
+  h2 { font-size: 20px; margin: 42px 0 10px; color: var(--navy); padding-top: 8px; border-top: 1px solid var(--line); }
+  h3 { font-size: 15.5px; margin: 22px 0 6px; }
+  p { margin: 6px 0 10px; }
+  .lead { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; }
+  .b-blue { background: var(--blueSoft); color: var(--navy); } .b-green { background: var(--greenSoft); color: #1d5e28; }
+  .b-amber { background: var(--amberSoft); color: #7a4b00; } .b-grey { background: #e9edf3; color: #3d4556; }
+  .btn { display: inline-block; padding: 1px 9px; border: 1px solid #9fb3cf; border-radius: 5px; background: var(--blueSoft);
+    font-weight: 600; font-size: 12.5px; white-space: nowrap; }
+  .btn.g { background: var(--greenSoft); border-color: #93c293; }
+  .btn.w { background: #fff; font-weight: 500; }
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: #fff; margin: 12px 0; }
+  .note { border-left: 4px solid var(--blue); background: #f2f7ff; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+  .warn { border-left: 4px solid var(--amber); background: #fff8e6; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .grid2, .grid4 { grid-template-columns: 1fr; } .wrap { grid-template-columns: 1fr; } nav { display: none; } }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 14px; font-size: 13px; }
+  th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: 600; color: #333c4e; }
+  td code, p code, li code { background: #eef1f6; padding: 0 4px; border-radius: 4px; font-size: 12.5px; }
+  ol.callouts { padding-left: 0; list-style: none; counter-reset: c; }
+  ol.callouts li { counter-increment: c; position: relative; padding-left: 34px; margin: 7px 0; }
+  ol.callouts li::before { content: counter(c); position: absolute; left: 0; top: 0; width: 22px; height: 22px; border-radius: 11px;
+    background: var(--amber); color: #fff; font-weight: 700; font-size: 12px; text-align: center; line-height: 22px; }
+  figure { margin: 10px 0 16px; }
+  figcaption { color: var(--muted); font-size: 12.5px; margin-top: 4px; }
+  svg { max-width: 100%; height: auto; display: block; }
+  svg text { font-family: "Segoe UI", system-ui, Arial, sans-serif; }
+  .mini { border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: #fff; }
+  .mini h4 { margin: 2px 0 4px; font-size: 13.5px; }
+  .mini p { font-size: 12.5px; color: #3d4556; margin: 4px 0 0; }
+  .eq { font-family: "Cambria Math", "Times New Roman", serif; font-size: 15px; background: var(--soft); padding: 6px 10px;
+    border-radius: 6px; display: inline-block; margin: 3px 0; }
+  .demo td { border: 1px solid var(--line); text-align: center; padding: 4px 6px; }
+  .demo th { border: 1px solid var(--line); text-align: center; }
+  .demo .r1 td { background: var(--rowBlue); }
+  .demo .own { background: var(--amberSoft); font-weight: 700; }
+  kbd { border: 1px solid #b8c0cc; border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; font-size: 12px; background: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <div class="brand">CDA - Compressor design</div>
+  <div class="sub">Mean-line design of axial compressors</div>
+  <a href="#start">Overview &amp; workflow</a>
+  <a href="#window">The window</a>
+  <div class="grp">Steps</div>
+  <a href="#inputs"><span class="step">1</span>Inputs</a>
+  <a href="#space"><span class="step">2</span>Design space</a>
+  <a href="#choose"><span class="step">3</span>Choose the point</a>
+  <a href="#maps">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reading the maps</a>
+  <a href="#design"><span class="step">4</span>Design tab</a>
+  <a href="#stages">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editing stages</a>
+  <a href="#geometry">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Geometry tab</a>
+  <a href="#compare">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compare designs tab</a>
+  <a href="#export"><span class="step">5</span>Export &amp; off-design</a>
+  <div class="grp">Reference</div>
+  <a href="#outputs">Outputs</a>
+  <a href="#variables">Design-file variables</a>
+  <a href="#method">Method</a>
+  <a href="#faq">Troubleshooting</a>
+</nav>
+
+<main>
+<h1 id="start">Compressor design app - guide</h1>
+<p class="lead">The app designs an axial compressor at the mean line, shows every possible design point on interactive maps,
+lets you pick the point you want, designs it row by row and sends it to the off-design app for the full compressor maps.</p>
+
+<div class="grid4">
+  <div class="mini"><h4>Configurations</h4><p>Rotor-stator stages; rotor-rotor on one shaft; rotor-rotor on two shafts (same direction or counter-rotating).</p></div>
+  <div class="mini"><h4>Any size</h4><p>1 to 12 stages or rotors. Stages repeat stage 1; any stage can get its own &phi;, &psi;, R or DF.</p></div>
+  <div class="mini"><h4>Choose visually</h4><p>Four linked maps of the whole design space; click a point or let criteria find the best one.</p></div>
+  <div class="mini"><h4>Off-design link</h4><p>One button saves the design file and loads it into the off-design app.</p></div>
+</div>
+
+<h3>Workflow</h3>
+<figure>
+<svg viewBox="0 0 1070 256" role="img" aria-label="Workflow of the app">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b6475"/></marker>
+  </defs>
+  <g font-size="12.5">
+    <rect x="10" y="62" width="172" height="92" rx="10" fill="#dcebff" stroke="#7aa3dc"/>
+    <circle cx="32" cy="82" r="12" fill="#1a4080"/><text x="32" y="87" fill="#fff" font-weight="700" text-anchor="middle">1</text>
+    <text x="50" y="87" font-weight="700" fill="#1a4080">Inputs</text>
+    <text x="22" y="109" fill="#333">configuration, stages,</text><text x="22" y="126" fill="#333">operating point,</text><text x="22" y="143" fill="#333">losses, sweep ranges</text>
+
+    <rect x="216" y="62" width="172" height="92" rx="10" fill="#dcebff" stroke="#7aa3dc"/>
+    <circle cx="238" cy="82" r="12" fill="#1a4080"/><text x="238" y="87" fill="#fff" font-weight="700" text-anchor="middle">2</text>
+    <text x="256" y="87" font-weight="700" fill="#1a4080">Compute</text>
+    <text x="228" y="109" fill="#333">every &#966;, &#968;, R (and</text><text x="228" y="126" fill="#333">U2/U1) is designed,</text><text x="228" y="143" fill="#333">with a progress bar</text>
+
+    <rect x="422" y="42" width="198" height="132" rx="10" fill="#dcebff" stroke="#7aa3dc"/>
+    <circle cx="444" cy="62" r="12" fill="#1a4080"/><text x="444" y="67" fill="#fff" font-weight="700" text-anchor="middle">3</text>
+    <text x="462" y="67" font-weight="700" fill="#1a4080">Choose the point</text>
+    <text x="434" y="90" fill="#333">&#8226; Find the best point</text><text x="434" y="108" fill="#333">&#8226; click a candidate</text>
+    <text x="434" y="126" fill="#333">&#8226; click any map</text>
+    <rect x="434" y="137" width="174" height="26" rx="5" fill="#d4ecd4" stroke="#93c293"/>
+    <text x="521" y="155" text-anchor="middle" font-weight="700" fill="#1d5e28">Use this point &#9654;</text>
+
+    <rect x="654" y="42" width="198" height="132" rx="10" fill="#dcebff" stroke="#7aa3dc"/>
+    <circle cx="676" cy="62" r="12" fill="#1a4080"/><text x="676" y="67" fill="#fff" font-weight="700" text-anchor="middle">4</text>
+    <text x="694" y="67" font-weight="700" fill="#1a4080">Design &amp; geometry</text>
+    <text x="666" y="90" fill="#333">&#8226; rows, stations, warnings</text><text x="666" y="108" fill="#333">&#8226; edit single stages</text>
+    <text x="666" y="126" fill="#333">&#8226; annulus, blades,</text><text x="676" y="144" fill="#333">velocity triangles</text>
+
+    <rect x="886" y="42" width="176" height="132" rx="10" fill="#dcebff" stroke="#7aa3dc"/>
+    <circle cx="908" cy="62" r="12" fill="#1a4080"/><text x="908" y="67" fill="#fff" font-weight="700" text-anchor="middle">5</text>
+    <text x="926" y="67" font-weight="700" fill="#1a4080">Export</text>
+    <rect x="898" y="78" width="152" height="26" rx="5" fill="#fff" stroke="#7aa3dc"/>
+    <text x="974" y="96" text-anchor="middle" font-weight="700" fill="#1a4080" font-size="12">Send to off-design &#9654;</text>
+    <text x="898" y="126" fill="#333">.mat &#183; Excel &#183; PNG</text><text x="898" y="144" fill="#333">design list &#183; projects</text>
+
+    <line x1="182" y1="108" x2="212" y2="108" stroke="#5b6475" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="388" y1="108" x2="418" y2="108" stroke="#5b6475" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="620" y1="108" x2="650" y2="108" stroke="#5b6475" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="852" y1="108" x2="882" y2="108" stroke="#5b6475" stroke-width="2" marker-end="url(#ar)"/>
+
+    <rect x="876" y="204" width="196" height="44" rx="8" fill="#f4f6f9" stroke="#b8c0cc" stroke-dasharray="4 3"/>
+    <text x="974" y="222" text-anchor="middle" font-weight="700" fill="#333">Off-design app</text>
+    <text x="974" y="239" text-anchor="middle" fill="#555" font-size="11.5">press Run: maps, surge, choke</text>
+    <line x1="974" y1="174" x2="974" y2="200" stroke="#5b6475" stroke-width="2" marker-end="url(#ar)"/>
+
+    <path d="M521 42 C 521 26, 96 26, 96 58" fill="none" stroke="#c77c0e" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    <text x="308" y="14" text-anchor="middle" fill="#7a4b00" font-size="12">change an input or a range: compute again (the maps warn when they are out of date)</text>
+    <path d="M540 174 C 540 232, 460 232, 460 178" fill="none" stroke="#2e8b3e" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    <text x="560" y="226" fill="#1d5e28" font-size="12">change a limit or a criterion: instant, no recomputation</text>
+  </g>
+</svg>
+<figcaption>The five steps. The tab titles and panel titles of the app carry the same step numbers.</figcaption>
+</figure>
+
+<h2 id="window">The window</h2>
+<figure>
+<svg viewBox="0 0 1040 330" role="img" aria-label="Layout of the main window">
+  <g font-size="13">
+    <rect x="1" y="1" width="1038" height="328" rx="8" fill="#fff" stroke="#b8c0cc"/>
+    <rect x="1" y="1" width="1038" height="26" rx="8" fill="#eef1f6"/><text x="14" y="19" fill="#333">CDA - Compressor design (mean-line)</text>
+    <rect x="12" y="36" width="230" height="262" rx="6" fill="#dcebff" stroke="#7aa3dc"/>
+    <text x="24" y="58" font-weight="700" fill="#1a4080">Step 1 - Inputs</text>
+    <g fill="#333" font-size="12"><text x="24" y="82">Machine</text><text x="24" y="102">Operating point</text><text x="24" y="122">Blading and losses</text>
+    <text x="24" y="142">Design space (sweep)</text></g>
+    <rect x="20" y="214" width="214" height="22" rx="4" fill="#bcd6fb" stroke="#7aa3dc"/><text x="127" y="229" text-anchor="middle" font-weight="700" font-size="11">Step 2 - Compute the design space</text>
+    <rect x="24" y="242" width="206" height="20" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="127" y="256" text-anchor="middle" font-size="12">Default inputs (reference study)</text>
+    <rect x="24" y="268" width="100" height="20" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="74" y="282" text-anchor="middle" font-size="12">Open project</text>
+    <rect x="130" y="268" width="100" height="20" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="180" y="282" text-anchor="middle" font-size="12">Save project</text>
+    <g font-size="12">
+      <rect x="252" y="36" width="60" height="22" fill="#fff" stroke="#b8c0cc"/><text x="282" y="51" text-anchor="middle">Guide</text>
+      <rect x="312" y="36" width="170" height="22" fill="#fff" stroke="#b8c0cc"/><text x="397" y="51" text-anchor="middle">Steps 2-3 Design space</text>
+      <rect x="482" y="36" width="120" height="22" fill="#fff" stroke="#b8c0cc"/><text x="542" y="51" text-anchor="middle">Step 4 Design</text>
+      <rect x="602" y="36" width="90" height="22" fill="#fff" stroke="#b8c0cc"/><text x="647" y="51" text-anchor="middle">Geometry</text>
+      <rect x="692" y="36" width="190" height="22" fill="#fff" stroke="#b8c0cc"/><text x="787" y="51" text-anchor="middle">Step 5 Export &amp; off-design</text>
+    </g>
+    <rect x="252" y="58" width="776" height="240" fill="#f9fafc" stroke="#b8c0cc"/>
+    <text x="640" y="170" text-anchor="middle" fill="#7a8394" font-size="15">content of the selected tab</text>
+    <rect x="12" y="304" width="1016" height="18" fill="#eef1f6"/><text x="20" y="317" fill="#555" font-size="12">Status bar: what just happened and what to do next</text>
+  </g>
+</svg>
+<figcaption>The inputs stay on the left on every tab. The status bar at the bottom always says what the last action did. Every
+operation that takes time shows a progress bar.</figcaption>
+</figure>
+
+<h2 id="inputs"><span class="badge b-blue">Step 1</span> Inputs</h2>
+<p>Set the machine and the operating point in the left panel. <span class="btn w">Default inputs (reference study)</span> fills every field
+with the values of the reference study for the selected configuration (2 stages or rotors).</p>
+<table>
+  <tr><th style="width:24%">Input</th><th style="width:14%">Default</th><th>Meaning and effect</th></tr>
+  <tr><td>Configuration</td><td>Rotor-Stator</td><td>Rotor-stator stages; rotor-rotor on one shaft (all rotors at U); rotor-rotor on two shafts (odd rotors at U, even rotors at U2/U1 &#215; U).</td></tr>
+  <tr><td>Number of stages / rotors</td><td>2</td><td>1 to 12. Every stage repeats stage 1 unless you change it in the Design tab.</td></tr>
+  <tr><td>Last stator present</td><td>on</td><td>Rotor-stator only: whether the last stage has its stator.</td></tr>
+  <tr><td>Last stator exit</td><td>stage inlet angle</td><td>Repeating stage (the last stator turns the flow back to &#945;<sub>1</sub>) or axial exit (no swirl leaves the machine).</td></tr>
+  <tr><td>Even rotors</td><td>same direction</td><td>Two shafts only: counter-rotating even rotors are written with a negative U2.</td></tr>
+  <tr><td>Speed ratio U2/U1 (min, step, max)</td><td>0.8 : 0.05 : 1.7</td><td>Two shafts only: range of blade-speed ratios explored.</td></tr>
+  <tr><td>Mass flow, shaft speed</td><td>0.5 kg/s, 110 000 rpm</td><td>Mass flow sets the annulus areas; the speed of rotor 1 sets the mean radius r<sub>m</sub> = 60U/(2&#960;N).</td></tr>
+  <tr><td>Inlet T<sub>t</sub>, p<sub>t</sub></td><td>288 K, 100 kPa</td><td>Inlet stagnation state.</td></tr>
+  <tr><td>Rotor-1 Mach M<sub>r1</sub></td><td>0.75</td><td>Relative inlet Mach number of rotor 1; with &#966;, &#968;, R it fixes the velocities and therefore U.</td></tr>
+  <tr><td>DF rotors / stators</td><td>0.45 / 0.45</td><td>Lieblein diffusion factor; it sets the solidity of every row.</td></tr>
+  <tr><td>Chord</td><td>10 mm</td><td>Blade chord of all rows: sets h/c and the number of blades.</td></tr>
+  <tr><td>Loss model rotors / stators</td><td>linear / linear (quartic rotors for one shaft)</td><td>Profile-loss correlation y/c(DF) used for the loss coefficient.</td></tr>
+  <tr><td>Inlet velocity C<sub>1</sub></td><td>exact</td><td>Exact closed-form solution, or iterative (fsolve, tolerance 10<sup>-6</sup>) as used for the reference designs; they differ by 10<sup>-6</sup> to 10<sup>-4</sup>.</td></tr>
+  <tr><td>Gamma, gas constant</td><td>1.4, 287 J/kgK</td><td>Gas properties.</td></tr>
+  <tr><td>&#966;, &#968;, R (min, step, max)</td><td>0.40:0.01:1.20, 0.20:0.01:0.50, 0.50:0.01:0.75</td><td>Ranges of the design space. The label below shows how many points will be computed.</td></tr>
+</table>
+
+<h2 id="space"><span class="badge b-blue">Step 2</span> Compute the design space</h2>
+<p>Press <span class="btn">Step 2 - Compute the design space &#9654;</span>. Every combination of the flow coefficient &#966;, the loading
+coefficient &#968; and the reaction R (and of U2/U1 on two shafts) is designed through all the rows. A progress bar shows the
+advance; 65 000 points take about a second, a two-shaft space with a million points some seconds.</p>
+<p>A point is <b>feasible</b> when it is physical and respects every limit of the right panel (solidity, inlet Mach number, de Haller ratio,
+hub/tip ratio, h/c, exit swirl). Changing a limit updates the feasible region at once.</p>
+<div class="note">The best point for the chosen objective is selected automatically after the computation (black square on the maps).
+Nothing is designed in detail until you press <span class="btn g">Use this point &#9654; Design tab</span>.</div>
+
+<h2 id="choose"><span class="badge b-blue">Step 3</span> Choose the design point (Design space tab)</h2>
+<figure>
+<svg viewBox="0 0 1040 470" role="img" aria-label="Design space tab">
+  <g font-size="12">
+    <rect x="1" y="1" width="1038" height="468" rx="8" fill="#fff" stroke="#b8c0cc"/>
+    <rect x="12" y="12" width="660" height="70" rx="6" fill="#f4f6f9" stroke="#b8c0cc"/>
+    <text x="24" y="32" fill="#333">Reaction R of the maps [0.5 v]   Speed ratio [1 v]   [ ] All speed ratios</text>
+    <text x="24" y="50" fill="#333">Solidity shown [Rotor 1 v]   &#966; of the sizing lines [0.64 v]   Lines per map [6]</text>
+    <text x="24" y="68" fill="#333">Colour of the PR-&#951; map [&#966; v]   Contour map shows [&#951; v]   [ ] Show infeasible points</text>
+    <rect x="12" y="90" width="326" height="180" rx="4" fill="#fff" stroke="#b8c0cc"/>
+    <text x="175" y="108" text-anchor="middle" font-weight="600">Design map &#951; vs &#963;</text>
+    <g stroke-width="1.6" fill="none">
+      <path d="M40 140 L300 250" stroke="#0072bd"/><path d="M40 150 L300 238" stroke="#0072bd"/><path d="M40 160 L300 228" stroke="#0072bd"/>
+      <path d="M40 135 L230 170 L300 230" stroke="#d95319"/><path d="M60 140 L210 200 L290 245" stroke="#d95319"/></g>
+    <rect x="340" y="90" width="330" height="180" rx="4" fill="#fff" stroke="#b8c0cc"/>
+    <text x="505" y="108" text-anchor="middle" font-weight="600">Sizing map PR vs A&#8321;/&#7745;</text>
+    <ellipse cx="505" cy="200" rx="120" ry="52" fill="#e3e3e3"/>
+    <g stroke-width="1.6" fill="none"><path d="M450 230 L460 150" stroke="#1a8c33"/><path d="M490 235 L500 165" stroke="#1a8c33"/><path d="M530 238 L540 180" stroke="#1a8c33"/>
+      <path d="M455 150 L560 200" stroke="#7f3399"/><path d="M450 190 L555 230" stroke="#7f3399"/></g>
+    <rect x="12" y="276" width="326" height="182" rx="4" fill="#fff" stroke="#b8c0cc"/>
+    <text x="175" y="294" text-anchor="middle" font-weight="600">PR - &#951; map + Pareto front</text>
+    <g><circle cx="124" cy="386" r="2.6" fill="#7b9ff9"/><circle cx="153" cy="393" r="2.6" fill="#9ebeff"/><circle cx="211" cy="364" r="2.6" fill="#f7a889"/><circle cx="73" cy="412" r="2.6" fill="#3b4cc0"/><circle cx="128" cy="357" r="2.6" fill="#7b9ff9"/><circle cx="294" cy="440" r="2.6" fill="#b40426"/><circle cx="258" cy="421" r="2.6" fill="#d65244"/><circle cx="214" cy="374" r="2.6" fill="#f7a889"/><circle cx="213" cy="438" r="2.6" fill="#f7a889"/><circle cx="188" cy="415" r="2.6" fill="#f2cbb7"/><circle cx="221" cy="370" r="2.6" fill="#f7a889"/><circle cx="241" cy="421" r="2.6" fill="#ee8468"/><circle cx="138" cy="339" r="2.6" fill="#9ebeff"/><circle cx="265" cy="424" r="2.6" fill="#d65244"/><circle cx="232" cy="441" r="2.6" fill="#ee8468"/><circle cx="231" cy="444" r="2.6" fill="#ee8468"/><circle cx="159" cy="412" r="2.6" fill="#c0d4f5"/><circle cx="170" cy="426" r="2.6" fill="#c0d4f5"/><circle cx="268" cy="407" r="2.6" fill="#d65244"/><circle cx="101" cy="356" r="2.6" fill="#5977e3"/><circle cx="287" cy="435" r="2.6" fill="#b40426"/><circle cx="211" cy="386" r="2.6" fill="#f7a889"/><circle cx="184" cy="381" r="2.6" fill="#f2cbb7"/><circle cx="149" cy="390" r="2.6" fill="#9ebeff"/><circle cx="201" cy="436" r="2.6" fill="#f2cbb7"/><circle cx="223" cy="444" r="2.6" fill="#f7a889"/><circle cx="263" cy="450" r="2.6" fill="#d65244"/><circle cx="221" cy="379" r="2.6" fill="#f7a889"/><circle cx="264" cy="448" r="2.6" fill="#d65244"/><circle cx="274" cy="432" r="2.6" fill="#d65244"/><circle cx="231" cy="388" r="2.6" fill="#ee8468"/><circle cx="257" cy="426" r="2.6" fill="#d65244"/><circle cx="134" cy="342" r="2.6" fill="#9ebeff"/><circle cx="262" cy="449" r="2.6" fill="#d65244"/><circle cx="90" cy="409" r="2.6" fill="#5977e3"/><circle cx="162" cy="353" r="2.6" fill="#c0d4f5"/><circle cx="136" cy="406" r="2.6" fill="#9ebeff"/><circle cx="266" cy="404" r="2.6" fill="#d65244"/><circle cx="208" cy="361" r="2.6" fill="#f7a889"/><circle cx="232" cy="398" r="2.6" fill="#ee8468"/><circle cx="268" cy="449" r="2.6" fill="#d65244"/><circle cx="184" cy="437" r="2.6" fill="#f2cbb7"/><circle cx="140" cy="343" r="2.6" fill="#9ebeff"/><circle cx="205" cy="358" r="2.6" fill="#f7a889"/><circle cx="114" cy="373" r="2.6" fill="#7b9ff9"/><circle cx="207" cy="371" r="2.6" fill="#f7a889"/><circle cx="80" cy="415" r="2.6" fill="#3b4cc0"/><circle cx="141" cy="424" r="2.6" fill="#9ebeff"/><circle cx="272" cy="423" r="2.6" fill="#d65244"/><circle cx="174" cy="390" r="2.6" fill="#c0d4f5"/><circle cx="215" cy="414" r="2.6" fill="#f7a889"/><circle cx="196" cy="407" r="2.6" fill="#f2cbb7"/><circle cx="282" cy="434" r="2.6" fill="#b40426"/><circle cx="167" cy="406" r="2.6" fill="#c0d4f5"/><circle cx="123" cy="363" r="2.6" fill="#7b9ff9"/><circle cx="290" cy="439" r="2.6" fill="#b40426"/><circle cx="193" cy="351" r="2.6" fill="#f2cbb7"/><circle cx="163" cy="392" r="2.6" fill="#c0d4f5"/><circle cx="75" cy="392" r="2.6" fill="#3b4cc0"/><circle cx="212" cy="365" r="2.6" fill="#f7a889"/><circle cx="211" cy="401" r="2.6" fill="#f7a889"/><circle cx="223" cy="396" r="2.6" fill="#f7a889"/><circle cx="229" cy="429" r="2.6" fill="#ee8468"/><circle cx="75" cy="342" r="2.6" fill="#3b4cc0"/><circle cx="222" cy="447" r="2.6" fill="#f7a889"/><circle cx="127" cy="378" r="2.6" fill="#7b9ff9"/><circle cx="203" cy="384" r="2.6" fill="#f2cbb7"/><circle cx="152" cy="366" r="2.6" fill="#9ebeff"/><circle cx="153" cy="392" r="2.6" fill="#9ebeff"/><circle cx="138" cy="370" r="2.6" fill="#9ebeff"/><circle cx="244" cy="383" r="2.6" fill="#ee8468"/><circle cx="198" cy="419" r="2.6" fill="#f2cbb7"/><circle cx="140" cy="356" r="2.6" fill="#9ebeff"/><circle cx="251" cy="402" r="2.6" fill="#ee8468"/><circle cx="112" cy="376" r="2.6" fill="#7b9ff9"/><circle cx="227" cy="377" r="2.6" fill="#f7a889"/><circle cx="142" cy="367" r="2.6" fill="#9ebeff"/><circle cx="258" cy="418" r="2.6" fill="#d65244"/><circle cx="262" cy="407" r="2.6" fill="#d65244"/><circle cx="146" cy="396" r="2.6" fill="#9ebeff"/><circle cx="269" cy="425" r="2.6" fill="#d65244"/><circle cx="121" cy="347" r="2.6" fill="#7b9ff9"/><circle cx="189" cy="365" r="2.6" fill="#f2cbb7"/><circle cx="252" cy="440" r="2.6" fill="#ee8468"/><circle cx="111" cy="361" r="2.6" fill="#7b9ff9"/><circle cx="252" cy="428" r="2.6" fill="#ee8468"/><circle cx="251" cy="409" r="2.6" fill="#ee8468"/><circle cx="99" cy="363" r="2.6" fill="#5977e3"/><circle cx="249" cy="403" r="2.6" fill="#ee8468"/><circle cx="148" cy="375" r="2.6" fill="#9ebeff"/><circle cx="164" cy="377" r="2.6" fill="#c0d4f5"/><circle cx="277" cy="418" r="2.6" fill="#b40426"/><circle cx="71" cy="422" r="2.6" fill="#3b4cc0"/><circle cx="268" cy="449" r="2.6" fill="#d65244"/><circle cx="168" cy="427" r="2.6" fill="#c0d4f5"/><circle cx="279" cy="422" r="2.6" fill="#b40426"/><circle cx="238" cy="438" r="2.6" fill="#ee8468"/><circle cx="219" cy="408" r="2.6" fill="#f7a889"/><circle cx="135" cy="367" r="2.6" fill="#9ebeff"/><circle cx="121" cy="342" r="2.6" fill="#7b9ff9"/><circle cx="202" cy="380" r="2.6" fill="#f2cbb7"/><circle cx="252" cy="391" r="2.6" fill="#d65244"/><circle cx="273" cy="437" r="2.6" fill="#d65244"/><circle cx="278" cy="446" r="2.6" fill="#b40426"/><circle cx="272" cy="432" r="2.6" fill="#d65244"/><circle cx="73" cy="404" r="2.6" fill="#3b4cc0"/><circle cx="109" cy="363" r="2.6" fill="#7b9ff9"/><circle cx="219" cy="409" r="2.6" fill="#f7a889"/><circle cx="163" cy="425" r="2.6" fill="#c0d4f5"/><circle cx="208" cy="388" r="2.6" fill="#f7a889"/><circle cx="127" cy="414" r="2.6" fill="#7b9ff9"/><circle cx="177" cy="415" r="2.6" fill="#c0d4f5"/><circle cx="149" cy="355" r="2.6" fill="#9ebeff"/><circle cx="190" cy="423" r="2.6" fill="#f2cbb7"/><circle cx="109" cy="408" r="2.6" fill="#7b9ff9"/><circle cx="277" cy="443" r="2.6" fill="#b40426"/><circle cx="255" cy="392" r="2.6" fill="#d65244"/><circle cx="211" cy="437" r="2.6" fill="#f7a889"/><circle cx="81" cy="361" r="2.6" fill="#3b4cc0"/><circle cx="130" cy="384" r="2.6" fill="#7b9ff9"/><circle cx="165" cy="383" r="2.6" fill="#c0d4f5"/><circle cx="245" cy="382" r="2.6" fill="#ee8468"/><circle cx="82" cy="348" r="2.6" fill="#3b4cc0"/><circle cx="98" cy="342" r="2.6" fill="#5977e3"/><circle cx="289" cy="446" r="2.6" fill="#b40426"/><circle cx="89" cy="382" r="2.6" fill="#5977e3"/><circle cx="141" cy="365" r="2.6" fill="#9ebeff"/><circle cx="149" cy="396" r="2.6" fill="#9ebeff"/><circle cx="202" cy="387" r="2.6" fill="#f2cbb7"/><circle cx="113" cy="366" r="2.6" fill="#7b9ff9"/><circle cx="98" cy="387" r="2.6" fill="#5977e3"/><circle cx="231" cy="401" r="2.6" fill="#ee8468"/><circle cx="88" cy="352" r="2.6" fill="#5977e3"/><circle cx="154" cy="393" r="2.6" fill="#9ebeff"/><circle cx="246" cy="409" r="2.6" fill="#ee8468"/><circle cx="250" cy="426" r="2.6" fill="#ee8468"/><circle cx="167" cy="374" r="2.6" fill="#c0d4f5"/><circle cx="182" cy="409" r="2.6" fill="#f2cbb7"/><circle cx="165" cy="403" r="2.6" fill="#c0d4f5"/><circle cx="174" cy="365" r="2.6" fill="#c0d4f5"/><circle cx="191" cy="412" r="2.6" fill="#f2cbb7"/><circle cx="86" cy="375" r="2.6" fill="#5977e3"/><circle cx="166" cy="420" r="2.6" fill="#c0d4f5"/><circle cx="281" cy="429" r="2.6" fill="#b40426"/><circle cx="272" cy="441" r="2.6" fill="#d65244"/><circle cx="129" cy="378" r="2.6" fill="#7b9ff9"/><circle cx="98" cy="410" r="2.6" fill="#5977e3"/><circle cx="219" cy="440" r="2.6" fill="#f7a889"/><circle cx="248" cy="428" r="2.6" fill="#ee8468"/><circle cx="235" cy="417" r="2.6" fill="#ee8468"/><circle cx="93" cy="389" r="2.6" fill="#5977e3"/><circle cx="71" cy="349" r="2.6" fill="#3b4cc0"/><circle cx="244" cy="385" r="2.6" fill="#ee8468"/><circle cx="91" cy="345" r="2.6" fill="#5977e3"/><circle cx="268" cy="412" r="2.6" fill="#d65244"/><circle cx="75" cy="413" r="2.6" fill="#3b4cc0"/><circle cx="97" cy="413" r="2.6" fill="#5977e3"/><circle cx="222" cy="436" r="2.6" fill="#f7a889"/><circle cx="284" cy="437" r="2.6" fill="#b40426"/><circle cx="250" cy="389" r="2.6" fill="#ee8468"/><circle cx="243" cy="416" r="2.6" fill="#ee8468"/><circle cx="231" cy="380" r="2.6" fill="#ee8468"/><circle cx="239" cy="445" r="2.6" fill="#ee8468"/><circle cx="84" cy="366" r="2.6" fill="#3b4cc0"/><circle cx="197" cy="427" r="2.6" fill="#f2cbb7"/><circle cx="124" cy="352" r="2.6" fill="#7b9ff9"/><circle cx="126" cy="392" r="2.6" fill="#7b9ff9"/><circle cx="240" cy="406" r="2.6" fill="#ee8468"/><circle cx="153" cy="374" r="2.6" fill="#9ebeff"/><circle cx="149" cy="375" r="2.6" fill="#9ebeff"/></g>
+    <polyline points="60,320 66,322 72,324 78,325 84,327 90,328 96,329 102,330 108,331 114,331 120,332 126,332 132,332 138,332 144,333 150,333 156,334 162,335 168,337 174,338 180,340 186,343 192,345 198,348 204,351 210,354 216,358 222,361 228,365 234,370 240,374 246,379 252,384 258,390 264,395 270,401 276,407 282,414 288,420 294,427 300,434" stroke="#111" stroke-width="2" fill="none"/>
+    <rect x="340" y="276" width="330" height="182" rx="4" fill="#fff" stroke="#b8c0cc"/>
+    <text x="505" y="294" text-anchor="middle" font-weight="600">Contour over &#966;-&#968;</text>
+    <polygon points="380,450 420,450 640,310 640,300 560,300" fill="#e6c94a" opacity=".8"/>
+    <polygon points="380,450 560,300 420,300" fill="#7bc77d" opacity=".75"/>
+    <polyline points="380,450 560,300" stroke="#111" stroke-width="2" fill="none"/>
+    <rect x="682" y="12" width="346" height="300" rx="6" fill="#dcebff" stroke="#7aa3dc"/>
+    <text x="694" y="32" font-weight="700" fill="#1a4080">Step 3 - Choose the design point</text>
+    <text x="694" y="54" fill="#333">Objective [Maximum efficiency v]</text>
+    <text x="694" y="74" fill="#333">Constraints: [ ] PR &#8805;  [ ] &#951; &#8805;  [ ] A&#8321;/&#7745; &#8804;</text>
+    <text x="694" y="94" fill="#333">Limits: solidity, Mach, de Haller, hub/tip, h/c, swirl</text>
+    <rect x="694" y="108" width="322" height="24" rx="4" fill="#bcd6fb" stroke="#7aa3dc"/><text x="855" y="125" text-anchor="middle" font-weight="700">Find the best point</text>
+    <rect x="694" y="140" width="322" height="160" fill="#fff" stroke="#b8c0cc"/>
+<text x="704" y="158" fill="#333" font-weight="600">#</text><text x="730" y="158" fill="#333" font-weight="600">&#966;</text><text x="780" y="158" fill="#333" font-weight="600">&#968;</text><text x="830" y="158" fill="#333" font-weight="600">R</text><text x="880" y="158" fill="#333" font-weight="600">PR</text><text x="940" y="158" fill="#333" font-weight="600">&#951;</text>
+    <text x="704" y="178" fill="#555">1</text><text x="730" y="178" fill="#555">0.64</text><text x="780" y="178" fill="#555">0.25</text><text x="830" y="178" fill="#555">0.50</text><text x="880" y="178" fill="#555">1.482</text><text x="940" y="178" fill="#555">0.912</text>
+    <text x="704" y="196" fill="#555">2</text><text x="730" y="196" fill="#555">0.65</text><text x="780" y="196" fill="#555">0.25</text><text x="830" y="196" fill="#555">0.50</text><text x="880" y="196" fill="#555">1.479</text><text x="940" y="196" fill="#555">0.912</text>
+    <text x="704" y="216" fill="#777">... click a row to select it</text>
+    <rect x="682" y="320" width="346" height="138" rx="6" fill="#fff" stroke="#93c293" stroke-width="2"/>
+    <text x="694" y="340" font-weight="700" fill="#1d5e28">Selected point</text>
+    <text x="694" y="360" fill="#333">&#966; = 0.640  &#968; = 0.250  R = 0.500</text><text x="694" y="378" fill="#333">PR = 1.4824  &#951; = 0.9123  ...  Status: feasible</text>
+    <rect x="694" y="414" width="322" height="32" rx="5" fill="#d4ecd4" stroke="#93c293"/>
+    <text x="855" y="435" text-anchor="middle" font-weight="700" fill="#1d5e28">Use this point &#9654; Design tab</text>
+  </g>
+  <g font-size="12" font-weight="700" fill="#fff">
+    <circle cx="660" cy="22" r="11" fill="#c77c0e"/><text x="660" y="26" text-anchor="middle">1</text>
+    <circle cx="326" cy="102" r="11" fill="#c77c0e"/><text x="326" y="106" text-anchor="middle">2</text>
+    <circle cx="658" cy="102" r="11" fill="#c77c0e"/><text x="658" y="106" text-anchor="middle">3</text>
+    <circle cx="326" cy="288" r="11" fill="#c77c0e"/><text x="326" y="292" text-anchor="middle">4</text>
+    <circle cx="658" cy="288" r="11" fill="#c77c0e"/><text x="658" y="292" text-anchor="middle">5</text>
+    <circle cx="1016" cy="28" r="11" fill="#c77c0e"/><text x="1016" y="32" text-anchor="middle">6</text>
+    <circle cx="1016" cy="120" r="11" fill="#c77c0e"/><text x="1016" y="124" text-anchor="middle">7</text>
+    <circle cx="1016" cy="336" r="11" fill="#c77c0e"/><text x="1016" y="340" text-anchor="middle">8</text>
+  </g>
+</svg>
+</figure>
+<ol class="callouts">
+  <li><b>Map controls.</b> Which slice the maps show: the reaction R (design and contour maps), the speed ratio (two shafts), the solidity
+      of which row (design map), the &#966; of the sizing lines, how many lines, which quantity colours the PR-&#951; map and which quantity
+      the contour map draws.</li>
+  <li><b>Design map</b> &#951; against the solidity, lines of constant &#966; (blue) and &#968; (orange), dashed lines at the solidity limits.</li>
+  <li><b>Sizing map</b> pressure ratio against the inlet area per unit mass flow: grey = every feasible point, lines of constant R (green)
+      and &#968; (violet) at the chosen &#966;.</li>
+  <li><b>PR-&#951; map</b> of all feasible points, coloured by the quantity you choose, with the Pareto front (black): no point is both
+      more efficient and of higher pressure ratio than a point on the front.</li>
+  <li><b>Contour map</b> of any quantity over &#966; and &#968; at the chosen R; the black line bounds the feasible region.</li>
+  <li><b>Objective and constraints.</b> What "best" means and which points may be chosen. Changes update the candidates at once.</li>
+  <li><b>Find the best point</b> and the ten best candidates; click a row to select that candidate.</li>
+  <li><b>Selected point</b> shows its values and status. <span class="btn g">Use this point &#9654; Design tab</span> designs it in detail
+      and opens the Design tab.</li>
+</ol>
+
+<h3>Three ways to select a point</h3>
+<div class="grid2">
+  <div class="card"><b>By criteria</b><br>Choose the objective, tick constraints (e.g. &#951; &#8805; 0.90), press
+  <span class="btn">Find the best point</span>. The best point and nine runners-up are listed.</div>
+  <div class="card"><b>By clicking a map</b><br>Click near any point of any of the four maps: the nearest point shown is selected and all maps
+  move to its slice. Use the axes toolbar to zoom first if points are dense.</div>
+</div>
+<div class="card"><b>By typing</b> (Design tab): enter &#966;, &#968;, R (and U2/U1) and press <span class="btn w">Design the typed point</span> -
+any value, also between the grid values.</div>
+
+<h3>Markers on every map</h3>
+<table style="width:auto">
+  <tr><td><svg width="22" height="22" viewBox="0 0 22 22"><polygon points="11,1 14,8 21,8 15.5,13 18,21 11,16 4,21 6.5,13 1,8 8,8" fill="#ffd900" stroke="#000"/></svg></td><td>best point for the objective and constraints</td></tr>
+  <tr><td><svg width="22" height="22" viewBox="0 0 22 22"><rect x="4" y="4" width="14" height="14" fill="none" stroke="#000" stroke-width="2.4"/></svg></td><td>selected point (click a map or a candidate)</td></tr>
+  <tr><td><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8" fill="none" stroke="#d90000" stroke-width="2.4"/></svg></td><td>current design (the point shown in the Design tab)</td></tr>
+</table>
+
+<h3 id="maps">Reading the maps</h3>
+<div class="grid2">
+  <div class="card"><b>Colour of the PR-&#951; map</b><br>The two axes are always pressure ratio and efficiency. The colour adds a third
+  quantity: with "Flow coefficient &#966;" you see which &#966; gives the points along the Pareto front, with "A&#8321;/&#7745;" which
+  points give a small machine, with "Highest inlet Mach" which points approach the Mach limit.</div>
+  <div class="card"><b>Contour map shows</b><br>Choose any quantity (efficiency, pressure ratio, area, highest solidity, Mach number,
+  de Haller ratio, hub/tip ratio, blade speed, mean radius, exit swirl) to see how it varies over &#966; and &#968; - for instance where
+  the hub/tip ratio becomes too small. Infeasible regions are blank (or shown with "Show infeasible points").</div>
+</div>
+<div class="note">Hover the labels of the map controls for a short explanation. The title of each map says what it shows, at which R
+and speed ratio, and which quantity the colours represent.</div>
+
+<h2 id="design"><span class="badge b-blue">Step 4</span> Design tab</h2>
+<figure>
+<svg viewBox="0 0 1040 330" role="img" aria-label="Design tab">
+  <g font-size="12">
+    <rect x="1" y="1" width="1038" height="328" rx="8" fill="#fff" stroke="#b8c0cc"/>
+    <rect x="12" y="12" width="540" height="64" rx="6" fill="#dcebff" stroke="#7aa3dc"/>
+    <text x="24" y="31" font-weight="700" fill="#1a4080">Step 4 - Design point of stage 1</text>
+    <text x="24" y="48" fill="#333">&#966; [0.64]  &#968; [0.25]  R [0.5]  U2/U1 [1]</text>
+    <rect x="24" y="54" width="230" height="18" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="139" y="67" text-anchor="middle">Design the typed point</text>
+    <rect x="270" y="54" width="270" height="18" rx="4" fill="#bcd6fb" stroke="#7aa3dc"/><text x="405" y="67" text-anchor="middle" font-weight="700">Send to the off-design app &#9654;</text>
+    <rect x="12" y="84" width="540" height="110" rx="6" fill="#fff" stroke="#b8c0cc"/>
+    <text x="300" y="102" font-weight="700" fill="#1a4080">Stages / rotors - double-click a cell</text>
+    <text fill="#555" x="34" y="108">Stage</text><text fill="#555" x="100" y="108">&#966;</text><text fill="#555" x="180" y="108">&#968;</text><text fill="#555" x="260" y="108">R</text><text fill="#555" x="340" y="108">DF rotor</text><text fill="#555" x="430" y="108">DF stator</text>
+    <rect x="24" y="113" width="516" height="20" fill="#e1efff"/><text x="34" y="127">1</text><text x="100" y="127">0.64</text><text x="180" y="127">0.25</text><text x="260" y="127">0.50</text><text x="340" y="127">0.45</text><text x="430" y="127">0.45</text>
+    <text x="34" y="149">2</text><text x="100" y="149">0.64</text><text x="180" y="149">0.25</text><text x="260" y="149">0.50</text><text x="340" y="149">0.45</text><text x="430" y="149">0.45</text>
+    <rect x="172" y="156" width="54" height="20" fill="#fff0b0"/><text x="34" y="171">3</text><text x="100" y="171">0.64</text><text x="180" y="171" font-weight="700">0.22</text><text x="260" y="171">0.50</text><text x="340" y="171">0.45</text><text x="430" y="171">0.45</text>
+    <rect x="564" y="12" width="464" height="182" rx="6" fill="#fff" stroke="#b8c0cc"/>
+    <text x="576" y="31" font-weight="700" fill="#1a4080">Summary</text><text x="576" y="52" fill="#555">PR, efficiency, work, power, U, r_m, areas, blades ...</text>
+    <rect x="12" y="202" width="1016" height="62" rx="6" fill="#fff" stroke="#b8c0cc"/>
+    <text x="24" y="220" font-weight="700" fill="#1a4080">Blade rows</text><text x="24" y="240" fill="#555">angles, velocities, Mach numbers, de Haller, DF, solidity, loss, metal angles, incidence, deviation, camber, stagger, blades</text>
+    <rect x="12" y="270" width="540" height="52" rx="6" fill="#fff" stroke="#b8c0cc"/>
+    <text x="24" y="288" font-weight="700" fill="#1a4080">Stations</text><text x="24" y="308" fill="#555">T, p, Cx, area, hub/tip, tip and hub radius, blade height, h/c</text>
+    <rect x="564" y="270" width="464" height="52" rx="6" fill="#fff8e6" stroke="#e0b866"/>
+    <text x="576" y="288" font-weight="700" fill="#7a4b00">Status and warnings</text><text x="576" y="308" fill="#555">in plain words, e.g. "Rotor 1: de Haller ratio 0.66 below 0.72"</text>
+  </g>
+  <g font-size="12" font-weight="700" fill="#fff">
+    <circle cx="540" cy="24" r="11" fill="#c77c0e"/><text x="540" y="28" text-anchor="middle">1</text>
+    <circle cx="540" cy="96" r="11" fill="#c77c0e"/><text x="540" y="100" text-anchor="middle">2</text>
+    <circle cx="1016" cy="24" r="11" fill="#c77c0e"/><text x="1016" y="28" text-anchor="middle">3</text>
+    <circle cx="1016" cy="214" r="11" fill="#c77c0e"/><text x="1016" y="218" text-anchor="middle">4</text>
+    <circle cx="540" cy="282" r="11" fill="#c77c0e"/><text x="540" y="286" text-anchor="middle">5</text>
+    <circle cx="1016" cy="282" r="11" fill="#c77c0e"/><text x="1016" y="286" text-anchor="middle">6</text>
+  </g>
+</svg>
+</figure>
+<ol class="callouts">
+  <li><b>Design point</b> of stage 1 (rotor 1). It is filled by <span class="btn g">Use this point</span>; you can also type any point and
+  press <span class="btn w">Design the typed point</span>. <span class="btn">Send to the off-design app &#9654;</span> is available here too.</li>
+  <li><b>Stage table</b>: one line per stage (rotor-stator) or rotor (rotor-rotor). See <a href="#stages">Editing stages</a>.</li>
+  <li><b>Summary</b>: pressure ratio, efficiency, temperature ratio, work, power, speeds, mean radius, inlet area, hub/tip ratios, blades.</li>
+  <li><b>Blade rows</b>: one line per row with every aerodynamic and blading quantity.</li>
+  <li><b>Stations</b>: inlet and the exit of every row.</li>
+  <li><b>Status and warnings</b>: which limits the design violates and any doubtful value, in plain words.</li>
+</ol>
+
+<h3 id="stages">Editing stages</h3>
+<p>Every cell shows the value that stage uses. To give one stage its own value, <b>double-click the cell, type the value and press
+<kbd>Enter</kbd></b>. The design is recomputed at once and the cell turns yellow. Row 1 (blue) is the design point itself: editing it
+changes the design point.</p>
+<table class="demo" style="width:auto; min-width:520px">
+  <tr><th>Stage</th><th>&#966;</th><th>&#968;</th><th>R</th><th>DF rotor</th><th>DF stator</th></tr>
+  <tr class="r1"><td>1</td><td>0.55</td><td>0.30</td><td>0.50</td><td>0.45</td><td>0.45</td></tr>
+  <tr><td>2</td><td class="own">0.60</td><td class="own">0.28</td><td class="own">0.55</td><td>0.45</td><td>0.45</td></tr>
+  <tr><td>3</td><td class="own">0.65</td><td class="own">0.26</td><td class="own">0.60</td><td>0.45</td><td class="own">0.42</td></tr>
+</table>
+<p>Example: a three-stage machine whose later stages run at a higher flow coefficient, lower loading and higher reaction, with a lower
+diffusion factor in the last stator. <span class="btn w">Reset: all stages repeat stage 1</span> removes every own value. Rotor-rotor
+machines have one line per rotor with &#968; and DF.</p>
+<div class="warn">When stages differ or R &#8800; 0.5, keep the stator blading variables (stator_*) ticked in the Export tab - otherwise the
+off-design app mirrors the rotor blading and the stator angles are wrong. The app warns you before saving.</div>
+
+<h3 id="geometry">Geometry tab</h3>
+<div class="grid2">
+  <figure class="card">
+  <svg viewBox="0 0 460 210" role="img" aria-label="Meridional section">
+    <rect x="0" y="0" width="460" height="210" fill="#fff"/>
+    <polygon points="10,190 450,190 450,150 360,146 300,142 230,138 170,134 100,130 10,130" fill="#e0e0e0"/>
+    <polyline points="10,40 100,44 170,48 230,52 300,56 360,60 450,62" fill="none" stroke="#111" stroke-width="2"/>
+    <polyline points="10,130 100,130 170,134 230,138 300,142 360,146 450,150" fill="none" stroke="#111" stroke-width="2"/>
+    <polygon points="40,42 100,44 100,130 40,130" fill="#4d8ce6" stroke="#111"/>
+    <polygon points="130,46 170,48 170,134 130,132" fill="#f29a3f" stroke="#111"/>
+    <polygon points="200,50 230,52 230,138 200,136" fill="#4d8ce6" stroke="#111"/>
+    <polygon points="270,54 300,56 300,142 270,140" fill="#f29a3f" stroke="#111"/>
+    <line x1="10" y1="88" x2="450" y2="92" stroke="#777" stroke-dasharray="7 4"/>
+    <text x="380" y="85" font-size="12" fill="#555">mean radius</text>
+    <text x="54" y="30" font-size="12">R1</text><text x="140" y="34" font-size="12">S1</text><text x="206" y="38" font-size="12">R2</text><text x="276" y="42" font-size="12">S2</text>
+    <text x="12" y="206" font-size="12" fill="#555">hub (grey) and tip lines from the station areas</text>
+  </svg>
+  <figcaption><b>Meridional section</b>: annulus from the areas, rotors blue, counter-rotating rotors violet, stators orange.</figcaption>
+  </figure>
+  <figure class="card">
+  <svg viewBox="0 0 460 210" role="img" aria-label="Velocity triangles">
+    <rect x="0" y="0" width="460" height="210" fill="#fff"/>
+    <line x1="40" y1="160" x2="330" y2="160" stroke="#888" stroke-width="1.2"/>
+    <line x1="40" y1="160" x2="300" y2="60" stroke="#0059cc" stroke-width="3"/>
+    <line x1="40" y1="160" x2="300" y2="200" stroke="#d91a1a" stroke-width="3"/>
+    <line x1="300" y1="60" x2="300" y2="200" stroke="#1a991a" stroke-width="3"/>
+    <text x="306" y="62" font-size="13" font-weight="700" fill="#0059cc">C (absolute)</text>
+    <text x="306" y="204" font-size="13" font-weight="700" fill="#d91a1a">W (relative)</text>
+    <text x="306" y="134" font-size="13" font-weight="700" fill="#1a991a">U = C &#8722; W</text>
+    <text x="160" y="176" font-size="12" fill="#666">C<tspan baseline-shift="sub" font-size="9">x</tspan> (axial)</text>
+    <path d="M90 160 A 50 50 0 0 0 86 142" fill="none" stroke="#0059cc"/><text x="94" y="150" font-size="12" fill="#0059cc">&#945;</text>
+    <path d="M90 160 A 50 50 0 0 1 89 167" fill="none" stroke="#d91a1a"/><text x="94" y="174" font-size="12" fill="#d91a1a">&#946;</text>
+    <text x="40" y="24" font-size="12" fill="#333">rotor: solid = inlet, dashed = exit, same origin</text>
+    <text x="40" y="42" font-size="12" fill="#333">stator: only C (U = 0); the swirl removed is marked</text>
+  </svg>
+  <figcaption><b>Velocity triangles</b> of any row (choose it above the plot). Angles are measured from the axial direction;
+  tangential velocities are positive in the direction of rotor 1.</figcaption>
+  </figure>
+</div>
+<p>The third plot shows the <b>blade sections</b> at the mean radius: NACA-65 metal angles on a circular-arc camber line, with an
+illustrative 10 % thickness, three blades per row at the real pitch (chord / solidity).</p>
+
+<h3 id="compare">Compare designs tab</h3>
+<p>Every design you keep (<b>Add current design</b> in the Design, Export or Compare tab) is drawn here over the others, one colour per design.
+You can also add <b>design files</b> written by this app (they are rebuilt from their design record) or <b>project files</b> (their whole design list).</p>
+<div class="grid2">
+  <figure class="card">
+  <svg viewBox="0 0 460 230" role="img" aria-label="Compare tab layout">
+    <rect x="0" y="0" width="460" height="230" fill="#fff"/>
+    <rect x="6" y="6" width="120" height="160" fill="#eef3fb" stroke="#7a9cc6"/>
+    <text x="14" y="24" font-size="11" font-weight="700">Designs</text>
+    <rect x="14" y="32" width="10" height="10" fill="#0072bd"/><text x="30" y="41" font-size="10">&#9745; RS max &#951;</text>
+    <rect x="14" y="48" width="10" height="10" fill="#d95319"/><text x="30" y="57" font-size="10">&#9745; RS max &#960;</text>
+    <rect x="14" y="64" width="10" height="10" fill="#77ac30"/><text x="30" y="73" font-size="10">&#9744; RR-S max &#951;</text>
+    <text x="14" y="98" font-size="10" fill="#555">add / remove</text>
+    <text x="14" y="114" font-size="10" fill="#555">row quantity &#9662;</text>
+    <text x="14" y="130" font-size="10" fill="#555">station quantity &#9662;</text>
+    <text x="14" y="146" font-size="10" fill="#555">triangles of row &#9662;</text>
+    <g font-size="10" fill="#333">
+    <rect x="134" y="6" width="104" height="78" fill="#fff" stroke="#999"/><text x="140" y="20">1 &#960; vs &#951;</text>
+    <rect x="244" y="6" width="104" height="78" fill="#fff" stroke="#999"/><text x="250" y="20">2 &#960; vs A1/m</text>
+    <rect x="354" y="6" width="100" height="78" fill="#fff" stroke="#999"/><text x="360" y="20">3 annulus</text>
+    <rect x="134" y="90" width="104" height="78" fill="#fff" stroke="#999"/><text x="140" y="104">4 per row</text>
+    <rect x="244" y="90" width="104" height="78" fill="#fff" stroke="#999"/><text x="250" y="104">5 through machine</text>
+    <rect x="354" y="90" width="100" height="78" fill="#fff" stroke="#999"/><text x="360" y="104">6 triangles</text>
+    <rect x="6" y="174" width="448" height="50" fill="#f6f6f6" stroke="#999"/><text x="14" y="192">Comparison table: one column per design (&#960;, &#951;, &#951; without swirl recovery, size, limits, blades ...)</text>
+    </g>
+  </svg>
+  <figcaption><b>Layout</b>: the list on the left (tick <i>Show</i>, edit the name), six plots and the comparison table.</figcaption>
+  </figure>
+  <div class="card">
+  <ol>
+    <li><b>Pressure ratio vs efficiency</b>: filled marker = total-to-total efficiency, open marker = efficiency if the exit swirl is not recovered.</li>
+    <li><b>Size</b>: pressure ratio vs inlet area per unit mass flow.</li>
+    <li><b>Annulus</b>: tip and hub lines and the mean radius of every design.</li>
+    <li><b>Per row</b>: solidity, de Haller ratio, Mach number, loss, DF, angles, incidence, deviation, row pressure ratio, blades, h/c (circles rotors, squares stators).</li>
+    <li><b>Through the machine</b>: pressure ratio, efficiency, temperature ratio, swirl angle, axial velocity, static state, hub/tip ratio, blade height, area at every station.</li>
+    <li><b>Velocity triangles</b> of the chosen row for all designs (C thick, W thin; inlet solid, exit dashed).</li>
+  </ol>
+  <p>The plots save as PNG (300 dpi) and the table as Excel or CSV. Per-stage values typed in the Design tab are kept in project files
+  but not in design files; a rebuilt design that differs from its file is reported.</p>
+  </div>
+</div>
+
+<h2 id="export"><span class="badge b-blue">Step 5</span> Export &amp; off-design</h2>
+<figure>
+<svg viewBox="0 0 1040 300" role="img" aria-label="Export tab">
+  <g font-size="12">
+    <rect x="1" y="1" width="1038" height="298" rx="8" fill="#fff" stroke="#b8c0cc"/>
+    <rect x="12" y="12" width="470" height="220" rx="6" fill="#dcebff" stroke="#7aa3dc"/>
+    <text x="24" y="31" font-weight="700" fill="#1a4080">Step 5 - Export the current design</text>
+    <rect x="24" y="40" width="446" height="24" rx="4" fill="#bcd6fb" stroke="#7aa3dc"/><text x="247" y="57" text-anchor="middle" font-weight="700">Send to the off-design app &#9654;</text>
+    <rect x="24" y="70" width="446" height="20" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="247" y="84" text-anchor="middle">Save the design file (.mat) only</text>
+    <rect x="24" y="98" width="446" height="72" fill="#fff" stroke="#b8c0cc"/>
+    <text x="32" y="114" fill="#333">&#9745;</text><text x="52" y="114" fill="#333">alpha1</text><text x="120" y="114" fill="#333">Inlet absolute flow angle [deg]</text><text x="396" y="114" fill="#333">required</text>
+    <text x="32" y="132" fill="#333">&#9745;</text><text x="52" y="132" fill="#333">A_vec</text><text x="120" y="132" fill="#333">Annulus area at every station [m^2]</text><text x="396" y="132" fill="#333">required</text>
+    <text x="32" y="150" fill="#333">&#9744;</text><text x="52" y="150" fill="#333">Tt1</text><text x="120" y="150" fill="#333">Inlet stagnation temperature [K]</text><text x="396" y="150" fill="#333">optional</text>
+    <text x="32" y="166" fill="#777">...</text>
+    <rect x="24" y="176" width="140" height="20" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="94" y="190" text-anchor="middle">Tick all</text>
+    <rect x="170" y="176" width="140" height="20" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="240" y="190" text-anchor="middle">Required only</text>
+    <rect x="316" y="176" width="154" height="20" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="393" y="190" text-anchor="middle">Required + blading</text>
+    <rect x="24" y="204" width="296" height="20" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="172" y="218" text-anchor="middle">Export the tables to Excel</text>
+    <rect x="326" y="204" width="144" height="20" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="398" y="218" text-anchor="middle">Save all plots (PNG)</text>
+    <rect x="494" y="12" width="534" height="220" rx="6" fill="#fff" stroke="#b8c0cc"/>
+    <text x="506" y="31" font-weight="700" fill="#1a4080">Design list</text>
+    <text x="506" y="54" fill="#333" font-weight="600">#</text><text x="526" y="54" fill="#333" font-weight="600">Name</text><text x="776" y="54" fill="#333" font-weight="600">Configuration</text><text x="930" y="54" fill="#333" font-weight="600">PR</text><text x="980" y="54" fill="#333" font-weight="600">&#951;</text>
+    <text x="506" y="72" fill="#555">1</text><text x="526" y="72" fill="#555">rs_2st_phi0.64_psi0.25_R0.50</text><text x="776" y="72" fill="#555">Rotor-Stator</text><text x="930" y="72" fill="#555">1.482</text><text x="980" y="72" fill="#555">0.912</text>
+    <text x="506" y="90" fill="#555">2</text><text x="526" y="90" fill="#555">rr_diff_shaft_2st_phi0.57_psi0.23...</text><text x="776" y="90" fill="#555">Rotor-Rotor, 2 shafts</text><text x="930" y="90" fill="#555">1.509</text><text x="980" y="90" fill="#555">0.959</text>
+    <rect x="506" y="190" width="122" height="22" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="567" y="205" text-anchor="middle">Add current design</text><rect x="636" y="190" width="122" height="22" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="697" y="205" text-anchor="middle">Load selected</text><rect x="766" y="190" width="122" height="22" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="827" y="205" text-anchor="middle">Remove selected</text><rect x="896" y="190" width="122" height="22" rx="4" fill="#fff" stroke="#9fb3cf"/><text x="957" y="205" text-anchor="middle">Save all as .mat</text>
+    <rect x="12" y="240" width="1016" height="50" rx="6" fill="#f4f6f9" stroke="#b8c0cc"/>
+    <text x="24" y="260" font-weight="700" fill="#333">Log</text><text x="24" y="280" fill="#555">[10:42:07] Design file saved (24 variables): C:\...\rs_2st_phi0.64_psi0.25_R0.50.mat</text>
+  </g>
+</svg>
+</figure>
+<ul>
+  <li><span class="btn">Send to the off-design app &#9654;</span> saves the design file on your computer (it asks where the first time), opens
+  the off-design app if it is not open, selects the right compressor type and loads the file. Press <b>Run</b> there.</li>
+  <li><b>Variables written to the design file</b>: every variable is listed with its meaning, size and whether the off-design app
+  requires it. Untick what you do not want; the presets set common choices. The app refuses to save silently without a required variable
+  or without stator blading where it is needed.</li>
+  <li><b>Excel</b>: sheets Summary, Rows, Stations, Inputs, Off-design variables, Candidates, Design list and, if ticked, the whole
+  feasible design space.</li>
+  <li><b>PNG</b>: the four maps and the three geometry plots at 300 dpi, named after the case.</li>
+  <li><b>Design list</b>: keep several designs (any configuration) side by side, reload one, or save them all as design files at once.</li>
+  <li><b>Projects</b> (left panel): save and reopen the inputs, the point, the stage values, the design list and, optionally, the
+  design space.</li>
+</ul>
+
+<h2 id="outputs">Outputs</h2>
+<table>
+  <tr><th style="width:22%">Where</th><th>Quantities</th></tr>
+  <tr><td>Summary</td><td>configuration, stages, &#966;, &#968;, R, U2/U1, pressure ratio, isentropic efficiency, temperature ratio, specific work, power, mass flow, speed, blade speed U, mean radius, axial velocity, inlet flow angle &#945;<sub>1</sub>, A<sub>1</sub>/&#7745;, inlet and exit hub/tip, exit swirl, total blades, DF, loss models, status</td></tr>
+  <tr><td>Blade rows</td><td>U, inlet and exit flow angle, deflection, inlet and exit velocity, Mach numbers, de Haller ratio, DF, solidity, loss coefficient, metal angles, incidence, deviation, camber, stagger, number of blades</td></tr>
+  <tr><td>Stations</td><td>static temperature and pressure, axial velocity, area, hub/tip ratio, tip and hub radius, blade height, h/c</td></tr>
+  <tr><td>Design space</td><td>for every point: PR, &#951;, A<sub>1</sub>/&#7745;, U, r<sub>m</sub>, solidity range, highest inlet Mach, lowest de Haller, hub/tip at inlet and exit, exit swirl, feasibility and the reason when infeasible</td></tr>
+</table>
+
+<h2 id="variables">Design-file variables</h2>
+<p>The design file (.mat) is what the off-design app reads. Rotor-rotor machines use "_1" for the odd rotors and "_2" for the even rotors.</p>
+<table>
+  <tr><th style="width:22%">Variable</th><th>Meaning</th><th style="width:20%">Off-design app</th></tr>
+  <tr><td><code>alpha1</code>, <code>m_dot</code>, <code>n_stages</code>, <code>A_vec</code></td><td>inlet flow angle, mass flow, number of stages or rotors, area of every station</td><td><span class="badge b-blue">required</span></td></tr>
+  <tr><td><code>beta1_dash</code>, <code>beta2_dash</code> (<code>beta3_dash</code>, <code>beta4_dash</code>)</td><td>inlet and exit metal angles of the rotors (odd and even rotors)</td><td><span class="badge b-blue">required</span></td></tr>
+  <tr><td><code>incidence</code>, <code>deviation</code>, <code>deflection</code> (or <code>_1</code>, <code>_2</code>)</td><td>design incidence, deviation and flow turning of the rotors</td><td><span class="badge b-blue">required</span></td></tr>
+  <tr><td><code>w_loss_rotor</code>, <code>w_loss_stator</code> / <code>w_loss_rotor2</code></td><td>design loss coefficients</td><td><span class="badge b-blue">required</span></td></tr>
+  <tr><td><code>U</code> or <code>U1</code>, <code>U2</code></td><td>blade speed; on two shafts one per shaft, U2 &lt; 0 = counter-rotating</td><td><span class="badge b-blue">required</span></td></tr>
+  <tr><td><code>sigma_*</code>, <code>chord</code></td><td>solidities and chord</td><td><span class="badge b-green">Koch stall check</span></td></tr>
+  <tr><td><code>stator_beta_in</code>, <code>stator_beta_out</code>, <code>stator_incidence</code>, <code>stator_deviation</code>, <code>stator_deflection</code></td><td>stator blading</td><td><span class="badge b-amber">needed when R &#8800; 0.5 or stages differ</span></td></tr>
+  <tr><td><code>Tt1</code>, <code>Pt1</code></td><td>inlet stagnation state</td><td><span class="badge b-grey">optional</span></td></tr>
+  <tr><td><code>design_info</code>, <code>case_name</code></td><td>record of the design (point, PR, efficiency, inputs, date) and name of the case</td><td><span class="badge b-grey">optional</span></td></tr>
+</table>
+<p>A value is written once when it is the same for every stage (repeating stages) and as a row vector when stages differ.</p>
+
+<h2 id="method">Method</h2>
+<p>Stage 1 follows from &#966; = C<sub>x</sub>/U, &#968; = &#916;h<sub>0</sub>/U<sup>2</sup> and R:</p>
+<p><span class="eq">tan &#945;<sub>1</sub> = (1 &#8722; R &#8722; &#968;/2)/&#966;, &#8195; tan &#946;<sub>1</sub> = (R + &#968;/2)/&#966;,
+&#8195; tan &#945;<sub>2</sub> = (1 &#8722; R + &#968;/2)/&#966;, &#8195; tan &#946;<sub>2</sub> = (R &#8722; &#968;/2)/&#966;</span></p>
+<p>The rotor-1 relative Mach number M<sub>r1</sub> gives C<sub>1</sub>, then U = C<sub>x</sub>/&#966; and r<sub>m</sub> = 60U/(2&#960;N).
+Every row is marched at constant mean radius:</p>
+<ul>
+  <li>solidity from the diffusion factor (Lieblein): <span class="eq">&#963; = &#916;W<sub>&#952;</sub> / [2W<sub>1</sub>(DF &#8722; 1 + W<sub>2</sub>/W<sub>1</sub>)]</span></li>
+  <li>profile loss: <span class="eq">&#969; = (&#952;/c)(DF) &#183; 2&#963; / cos &#946;<sub>2</sub></span>, with the selected correlation for &#952;/c(DF)</li>
+  <li>metal angles from the NACA-65 incidence charts and Carter's deviation rule (charts valid for 0.5 &#8804; &#963; &#8804; 2)</li>
+  <li>areas from continuity A = &#7745;RT/(pC<sub>x</sub>) at every station, hub/tip ratio from the area and the mean radius</li>
+  <li>rotor-stator: the stator of stage k turns the flow to the inlet angle of stage k+1; rotor-rotor: every rotor adds &#968;U of swirl in
+      its own frame; on two shafts the even rotors turn at (U2/U1)&#183;U, with the opposite sign when counter-rotating</li>
+</ul>
+
+<h2 id="faq">Troubleshooting</h2>
+<table>
+  <tr><th style="width:34%">Problem</th><th>What to do</th></tr>
+  <tr><td>Buttons do nothing, or errors such as "Unable to find function" after replacing the app files</td><td>Close every app window, type <code>clear classes</code> in the Command Window and start the app again.</td></tr>
+  <tr><td>"No feasible point"</td><td>Relax a limit (e.g. the inlet Mach number), or widen the ranges. Tick "Show infeasible points" to see where the points are; the Selected point box gives the reason of any point.</td></tr>
+  <tr><td>The maps do not match the Design tab</td><td>The status bar says when the inputs changed after the computation: press Step 2 again.</td></tr>
+  <tr><td>Solidity outside 0.5-2</td><td>The NACA-65/Carter charts are extrapolated; change DF or the point, or accept it knowingly (warning in the Design tab).</td></tr>
+  <tr><td>"Send to the off-design app" says the app cannot receive designs</td><td>Use the off-design app of step 27 or later. The design file is saved anyway: load it there with "mat file input".</td></tr>
+  <tr><td>The guide does not show</td><td>Keep <code>cda_guide.html</code> in the folder of the app (and add it to the files of a compiled app); the button below the guide opens it in the web browser.</td></tr>
+</table>
+</main>
+</div>
+</body>
+</html>

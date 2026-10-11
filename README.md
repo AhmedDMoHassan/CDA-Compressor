@@ -66,8 +66,8 @@ Questions, bug reports and feature requests: please open an [issue](https://gith
 
 | Owner / author | Contribution | Contact |
 |---|---|---|
-| Ahmed Mohamed Ahmed Hassan | Off-design method, design and off-design applications, validation and sensitivity study (repository administrator) | ahmedhassan200282@gmail.com |
-| Abdalmoez Ahmed Abdullah Hemid | Off-design method, applications, validation and sensitivity study | abdalmoez.hemid04@eng-st.cu.edu.eg |
+| Ahmed Mohamed Ahmed Hassan | Off-design method, design and off-design applications, validation and sensitivity study, and app designing  (repository administrator) | ahmedhassan200282@gmail.com |
+| Abdalmoez Ahmed Abdullah Hemid | Off-design method, applications, validation and sensitivity study, and contributed to design module and the app | abdalmoez.hemid04@eng-st.cu.edu.eg |
 | Thabet Saber Thabet Abdelhamid | Design method, design study and design maps | thabetmaher709@gmail.com |
 | Deyaa ElHaq Nabil Elshebiny | Supervision, methodology review | deyaa.nabil@eng.cu.edu.eg |
 

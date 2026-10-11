@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "CDA Compressor: mean-line design and off-design analysis of axial compressors"
+version: 1.0.0
+date-released: 2026-10-11
+license: MIT
+type: software
+repository-code: "https://github.com/OWNER/CDA-Compressor"
+keywords:
+  - axial compressor
+  - mean-line design
+  - off-design performance
+  - rotor-rotor
+  - stall margin
+  - MATLAB
+authors:
+  - family-names: Hassan
+    given-names: Ahmed Mohamed Ahmed
+    affiliation: "Department of Aerospace Engineering, Faculty of Engineering, Cairo University"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: Hemid
+    given-names: Abdalmoez Ahmed Abdullah
+    affiliation: "Department of Aerospace Engineering, Faculty of Engineering, Cairo University"
+  - family-names: Abdelhamid
+    given-names: Thabet Saber Thabet
+    affiliation: "Department of Aerospace Engineering, Faculty of Engineering, Cairo University"
+  - family-names: Elshebiny
+    given-names: Deyaa ElHaq Nabil
+    affiliation: "Department of Aerospace Engineering, Faculty of Engineering, Cairo University"
+# After the paper is published, add:
+# preferred-citation:
+#   type: article
+#   title: "Preliminary Design and Off-Design Performance of Rotor-Stator and Rotor-Rotor Axial Compressor Configurations"
+#   authors: (same as above)
+#   journal: "..."
+#   year: 2026
+#   doi: "..."

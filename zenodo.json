@@ -1,0 +1,33 @@
+{
+  "title": "CDA Compressor: mean-line design and off-design analysis of axial compressors",
+  "upload_type": "software",
+  "description": "Two linked MATLAB apps and a launcher for the mean-line preliminary design (design space, selection, row-by-row design, comparison) and off-design analysis (performance maps, choke, peak pressure ratio, Howell stall onset, stall and choke margins, Greitzer B, Koch indicator, validation and correlation sensitivity) of rotor-stator and rotor-rotor axial compressors. Includes the design files of the eight designs and the NACA validation cases of the associated paper.",
+  "creators": [
+    {
+      "name": "Hassan, Ahmed Mohamed Ahmed",
+      "affiliation": "Cairo University"
+    },
+    {
+      "name": "Hemid, Abdalmoez Ahmed Abdullah",
+      "affiliation": "Cairo University"
+    },
+    {
+      "name": "Abdelhamid, Thabet Saber Thabet",
+      "affiliation": "Cairo University"
+    },
+    {
+      "name": "Elshebiny, Deyaa ElHaq Nabil",
+      "affiliation": "Cairo University"
+    }
+  ],
+  "keywords": [
+    "axial compressor",
+    "mean-line design",
+    "off-design performance",
+    "rotor-rotor configuration",
+    "stall margin",
+    "turbomachinery",
+    "MATLAB"
+  ],
+  "language": "eng"
+}

@@ -3,9 +3,9 @@ message: "If you use this software, please cite it as below."
 title: "CDA Compressor: mean-line design and off-design analysis of axial compressors"
 version: 1.0.0
 date-released: 2026-10-11
-license: MIT
+license: PolyForm-Noncommercial-1.0.0
 type: software
-repository-code: "https://github.com/OWNER/CDA-Compressor"
+repository-code: "https://github.com/AhmedDMoHassan/CDA-Compressor"
 keywords:
   - axial compressor
   - mean-line design

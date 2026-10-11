@@ -52,10 +52,33 @@ If you use CDA Compressor, please cite the software (button **"Cite this reposit
 
 > Hassan AMA, Hemid AAA, Abdelhamid TST, Elshebiny DN (2026) Preliminary design and off-design performance of rotor–stator and rotor–rotor axial compressor configurations. *Journal, volume, pages.* https://doi.org/xx.xxxx/xxxxx  *(to be completed after publication)*
 
+## Owners
+
+CDA Compressor is owned jointly by its four authors, who hold its copyright together (table below).
+The GitHub repository is administered by **Ahmed Mohamed Ahmed Hassan** ([@AhmedDMoHassan](https://github.com/AhmedDMoHassan)).
+
+Questions, bug reports and feature requests: please open an [issue](https://github.com/AhmedDMoHassan/CDA-Compressor/issues) or e-mail one of the owners.
+
 ## Authors
 
-Ahmed Mohamed Ahmed Hassan, Abdalmoez Ahmed Abdullah Hemid, Thabet Saber Thabet Abdelhamid, Deyaa ElHaq Nabil Elshebiny – Department of Aerospace Engineering, Faculty of Engineering, Cairo University, Giza, Egypt.
+| Owner / author | Contribution | Contact |
+|---|---|---|
+| Ahmed Mohamed Ahmed Hassan | Off-design method, design and off-design applications, validation and sensitivity study (repository administrator) | ahmedhassan200282@gmail.com |
+| Abdalmoez Ahmed Abdullah Hemid | Off-design method, applications, validation and sensitivity study | abdalmoez.hemid04@eng-st.cu.edu.eg |
+| Thabet Saber Thabet Abdelhamid | Design method, design study and design maps | thabetmaher709@gmail.com |
+| Deyaa ElHaq Nabil Elshebiny | Supervision, methodology review | deyaa.nabil@eng.cu.edu.eg |
+
+Department of Aerospace Engineering, Faculty of Engineering, Cairo University, Giza, Egypt.
 
 ## License
 
-MIT License – see [LICENSE](LICENSE). The MATLAB Runtime is distributed by MathWorks under its own license.
+**PolyForm Noncommercial License 1.0.0** – see [LICENSE](LICENSE).
+
+- ✅ Free for noncommercial use: study, teaching, academic and personal research, universities, research institutes, charities and government bodies.
+- ✅ You may modify and share it, but every copy must keep the copyright notice and the authors' names (the *Required Notice* lines in LICENSE).
+- ❌ Commercial use (selling it, putting it in a commercial product or service, or using it for paid company work) is **not allowed** without a separate written license from the owners.
+- 📧 Commercial licensing: ahmedhassan200282@gmail.com, deyaa.nabil@eng.cu.edu.eg
+
+If you use CDA Compressor in your work, please cite it (see *How to cite*).
+
+The MATLAB Runtime is distributed by MathWorks under its own license.

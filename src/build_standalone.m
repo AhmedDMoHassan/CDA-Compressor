@@ -1,3 +1,7 @@
+% CDA Compressor - Copyright (C) 2026 Ahmed Mohamed Ahmed Hassan, Abdalmoez Ahmed Abdullah Hemid,
+% Thabet Saber Thabet Abdelhamid and Deyaa ElHaq Nabil Elshebiny (Cairo University).
+% Free for noncommercial use under the PolyForm Noncommercial License 1.0.0; see LICENSE.
+% https://github.com/AhmedDMoHassan/CDA-Compressor
 % BUILD_STANDALONE  Builds the standalone program (runs without MATLAB) and its installer.
 % Needs MATLAB Compiler. Put this file, CDA_launcher.m, Compressor_design_app.m,
 % cda_core.m, cda_guide.html and Compressor_offdesign_app.m in one folder, cd there and run it.

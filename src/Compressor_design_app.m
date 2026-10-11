@@ -1,3 +1,7 @@
+% CDA Compressor - Copyright (C) 2026 Ahmed Mohamed Ahmed Hassan, Abdalmoez Ahmed Abdullah Hemid,
+% Thabet Saber Thabet Abdelhamid and Deyaa ElHaq Nabil Elshebiny (Cairo University).
+% Free for noncommercial use under the PolyForm Noncommercial License 1.0.0; see LICENSE.
+% https://github.com/AhmedDMoHassan/CDA-Compressor
 classdef Compressor_design_app < matlab.apps.AppBase
     % COMPRESSOR_DESIGN_APP  Mean-line preliminary design of axial compressors
     % (rotor-stator, rotor-rotor on one shaft, rotor-rotor on two shafts) with any

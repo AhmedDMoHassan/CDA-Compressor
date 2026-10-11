@@ -1,3 +1,7 @@
+% CDA Compressor - Copyright (C) 2026 Ahmed Mohamed Ahmed Hassan, Abdalmoez Ahmed Abdullah Hemid,
+% Thabet Saber Thabet Abdelhamid and Deyaa ElHaq Nabil Elshebiny (Cairo University).
+% Free for noncommercial use under the PolyForm Noncommercial License 1.0.0; see LICENSE.
+% https://github.com/AhmedDMoHassan/CDA-Compressor
 classdef Compressor_offdesign_app < matlab.apps.AppBase
 
     % Properties that correspond to app components

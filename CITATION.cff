@@ -2,10 +2,18 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "CDA Compressor: mean-line design and off-design analysis of axial compressors"
 version: 1.0.0
+doi: 10.5281/zenodo.23299570
 date-released: 2026-10-11
 license: PolyForm-Noncommercial-1.0.0
 type: software
 repository-code: "https://github.com/AhmedDMoHassan/CDA-Compressor"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23299570
+    description: "Version 1.0.0 (Zenodo)"
+  - type: doi
+    value: 10.5281/zenodo.23299569
+    description: "All versions, always resolves to the latest (Zenodo)"
 keywords:
   - axial compressor
   - mean-line design
@@ -17,7 +25,7 @@ authors:
   - family-names: Hassan
     given-names: Ahmed Mohamed Ahmed
     affiliation: "Department of Aerospace Engineering, Faculty of Engineering, Cairo University"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    orcid: "https://orcid.org/0000-0002-7130-8980"
   - family-names: Hemid
     given-names: Abdalmoez Ahmed Abdullah
     affiliation: "Department of Aerospace Engineering, Faculty of Engineering, Cairo University"

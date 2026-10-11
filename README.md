@@ -2,8 +2,7 @@
 
 **Mean-line preliminary design and off-design analysis of axial compressors**: rotor–stator (with or without the last stator), rotor–rotor on one shaft and rotor–rotor on two shafts.
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
-<!-- replace XXXXXXX with the concept DOI that Zenodo gives the repository -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23299569.svg)](https://doi.org/10.5281/zenodo.23299569)
 
 ![Configurations](src/cda_configurations.png)
 
@@ -20,7 +19,7 @@ The method and its validation against NACA measured compressor maps are describe
 
 Choose one of the three ways (files under **Releases** on the right of this page):
 
-1. **Windows program (no MATLAB needed)** – download `CDA_Compressor_Installer.exe` and run it. The installer also installs the free MATLAB Runtime R2025b (internet needed the first time). Start *CDA Compressor* from the Start menu.
+1. **Windows program (no MATLAB needed)** – download `CDA_Compressor_Installer_web.exe` and run it. The installer also installs the free MATLAB Runtime R2025b (internet needed the first time). Start *CDA Compressor* from the Start menu.
 2. **MATLAB toolbox** – download `CDA_Compressor_v1.0.0.mltbx` and double-click it in MATLAB. Start it from the APPS tab or by typing `CDA_launcher`.
 3. **From the source** – download the repository, add the `src` folder to the MATLAB path and run `CDA_launcher`.
 
@@ -48,9 +47,13 @@ Both apps have an illustrated guide (buttons in the launcher; `src/cda_guide.htm
 
 ## How to cite
 
-If you use CDA Compressor, please cite the software (button **"Cite this repository"** on the right, or the Zenodo DOI) and the paper:
+If you use CDA Compressor, please cite the software (button **"Cite this repository"** on the right) and the paper.
 
-> Hassan AMA, Hemid AAA, Abdelhamid TST, Elshebiny DN (2026) Preliminary design and off-design performance of rotor–stator and rotor–rotor axial compressor configurations. *Journal, volume, pages.* https://doi.org/xx.xxxx/xxxxx  *(to be completed after publication)*
+The software is archived on Zenodo. DOI of version 1.0.0: [10.5281/zenodo.23299570](https://doi.org/10.5281/zenodo.23299570); DOI of all versions (always the latest): [10.5281/zenodo.23299569](https://doi.org/10.5281/zenodo.23299569).
+
+> Hassan AMA, Hemid AAA, Abdelhamid TST, Elshebiny DEN (2026) CDA Compressor: mean-line design and off-design analysis of axial compressors, version 1.0.0 [software]. Zenodo. https://doi.org/10.5281/zenodo.23299570
+
+> Hassan AMA, Hemid AAA, Abdelhamid TST, Elshebiny DEN (2026) Preliminary design and off-design performance of rotor–stator and rotor–rotor axial compressor configurations. *Journal, volume, pages.* https://doi.org/xx.xxxx/xxxxx  *(to be completed after publication)*
 
 ## Owners
 
